@@ -107,6 +107,10 @@ put '/items/:id.json' do
 	
 		parametros = datos.select{|clave, valor| clave == "sku" || clave == "description" || clave == "stock" || clave == "price"}
 		if !parametros.empty?
+
+			#convierto el stock y el precio en numeros.
+			parameters['stock']=parameters['stock'].to_i if parameters.any?{|clave, valor| clave == "stock"}
+			parameters['price']=parameters['price'].to_f if parameters.any?{|clave, valor| clave == "price"}
 			item_elegido.modificar(parametros)
 			JSON.dump(item_elegido.info_completa) 
 		else 
@@ -203,6 +207,8 @@ delete '/cart/:username/:item_id.json' do
 			usuario.borrar_del_carrito(item_a_borrar)
 			JSON.dump(item_a_borrar)
 		end
+	else
+		halt 404, 'el usuario no existe' 
 	end
 
 	#ejemplo de borrar del carrito de un usuario uno/s elemento/s identificados por id

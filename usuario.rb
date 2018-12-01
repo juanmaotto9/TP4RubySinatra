@@ -33,7 +33,7 @@ class Usuario
 		#imprime algunos datos requeridos
 		{
 			nombre:@nombre_usuario,
-			items:@mi_carrito.mis_items_personales,
+			items:@mi_carrito.mis_items_reducidos,
 			fecha_creacion:@mi_carrito.fecha_creacion,
 			precio:@mi_carrito.monto_total
 		}

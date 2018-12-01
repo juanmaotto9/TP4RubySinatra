@@ -13,6 +13,10 @@ class Carrito
 		@mis_items_personales.push(un_item)
 	end
 
+	def mis_items_reducidos
+		mis_items_personales.map{|item| item.info_reducida}
+	end
+
 
 	def monto_total
 
