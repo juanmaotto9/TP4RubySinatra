@@ -18,7 +18,7 @@ class Usuario
 	def hay_carrito?
 
 		#devuelve true en caso de que haya carrito
-		@mi_carrito != nil?
+		!@mi_carrito.nil?
 	end
 
 
@@ -28,25 +28,22 @@ class Usuario
 		@mi_carrito.mis_items_personales
 	end
 
+	def imprimir
+
+		#imprime algunos datos requeridos
+		{
+			nombre:@nombre_usuario,
+			items:@mi_carrito.mis_items_personales,
+			fecha_creacion:@mi_carrito.fecha_creacion,
+			precio:@mi_carrito.monto_total
+		}
+	end
+
 
 	def usr_agregar_item(un_item)
 
 		#agrega "un item" a su carrito
 		@mi_carrito.agregar_item(un_item)
-	end
-
-
-	def fecha_creacion_carrito
-
-		#obtiene la fecha en que se creo su carrito
-		@mi_carrito.fecha_creacion
-	end
-
-
-	def calcular_monto_total
-
-		#obtiene el monto total de los productos que hay en el carrito
-		@mi_carrito.monto_total
 	end
 
 

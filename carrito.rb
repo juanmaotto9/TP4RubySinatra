@@ -1,11 +1,9 @@
 class Carrito
 	attr_accessor :mis_items_personales, :fecha_creacion
 
-	def initialize()
-	#(*items) para recibir varios params
-		@mis_items_personales=[]
+	def initialize
+		@mis_items_personales= []
 		@fecha_creacion= Date.today 
-		#items.each{|item| @mis_items_personales.push(item)}
 	end
 
 
@@ -19,7 +17,7 @@ class Carrito
 	def monto_total
 
 		#obtiene el monto total en precios de items
-		@mis_items_personales.inject(0){|sum, item| sum + item.precio}
+		@mis_items_personales.inject(0){|sum, item| sum + item.price}
 	end 
 
 

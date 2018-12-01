@@ -52,6 +52,9 @@ class Item
 	end
 
 
+
+
+	#funciones que utiliza Json
 	def as_json(options={})
 		{
 			id: @id,
@@ -66,10 +69,5 @@ class Item
 	def to_json(*options)
 		as_json(*options).to_json(*options)
 	end
-
-
-	#def to_json_pretty()
-		#JSON.pretty_generate(self)
-	#end
 
 end

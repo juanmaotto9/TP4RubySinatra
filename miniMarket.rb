@@ -38,6 +38,7 @@ mis_usuarios= [usr1, usr2]
 
 
 #implementacion
+#Hay un ejemplo de como usar c/u al final.
 
 get '/items.json' do 
 
@@ -56,7 +57,7 @@ get '/items/:id.json' do
 	#devuelve la informacion completa de un item, que es solicitado por parametro con su id
 
 	item_deseado= mis_items.detect{|item| item.id == params['id'].to_i}
-    status 404 if item_deseado.nil?
+    halt 404, "el id ingresado no existe" if item_deseado.nil?
 	JSON.dump(item_deseado.info_completa)
 
 	#ejemplo para pedir un item por id
@@ -83,7 +84,7 @@ post '/items.json' do
     	:price => datos["price"].to_f})
 
 	mis_items.push(item)
-    status 201, "item creado" 
+    status 201
     JSON.dump(item.info_completa)
 
     #ejemplo agregar valido(con todos los campos, si falta alguno habra error)
@@ -132,16 +133,14 @@ get '/cart/:username.json' do
 		if !usuario.hay_carrito?
 			usuario.crear_carrito
 		end
-		items_usuario= usuario.tus_items.map{|item| item.info_reducida}
-		#datos= {:fecha_creacion => usuario.fecha_creacion_carrito, :monto => usuario.calcular_monto_total }
-		#no anda el merge || merge JSON.parse datos
-		JSON.dump(items_usuario)
+		mostrar= usuario.imprimir
+		JSON.dump(mostrar)
 	else
 		halt 404, 'el usuario no existe'
 	end
 
 	#ejemplo de obtener el carrito de usuario con "nombre de usuario" :username
-	#curl -sSL -D - http://localhost:4567/items.json
+	#curl -sSL -D - http://localhost:4567/cart/juanCarlos.json
 end
 
 
